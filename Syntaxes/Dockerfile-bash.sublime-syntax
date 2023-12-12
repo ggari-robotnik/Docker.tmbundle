@@ -54,7 +54,13 @@ contexts:
           with_prototype:
             - match: \n
               pop: true
-        - match: ""
+        - match: <<([A-Za-z][A-Za-z0-9_]*)
+          set: scope:source.shell.bash
+          with_prototype:
+            - include: scope:source.shell.bash#prototype
+            - match: ^\1
+              pop: true
+        - match: ^(?!<<[A-Za-z][A-Za-z0-9_]*$)".*"
           set: scope:source.shell.bash
           with_prototype:
             - include: scope:source.shell.bash#prototype
